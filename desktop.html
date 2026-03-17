@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aqua Maze | Desktop Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell desktop-game-page">
+    <header class="game-header info-panel">
+      <div>
+        <p class="eyebrow">Clean Water Mission</p>
+        <h1 class="game-title">Water Puzzle</h1>
+        <p class="game-subtitle">Route clean water from the source to all communities. Help charity: water end the global water crisis.</p>
+      </div>
+      <div class="game-header-actions">
+        <button id="helpButton" class="help-icon-button" type="button" aria-label="Help" title="Game Help">?</button>
+        <a class="button-link secondary-button" href="index.html">Back</a>
+      </div>
+    </header>
+
+    <section class="desktop-game-layout">
+      <aside class="info-panel game-sidebar">
+        <div class="level-meta">
+          <p class="section-label">Level</p>
+          <h2 id="levelName">Level 1</h2>
+          <p id="levelRules" class="level-rules">Minimum score: 0</p>
+        </div>
+
+        <div class="score-panel">
+          <p class="section-label">Score</p>
+          <p class="score-value"><span id="scoreValue">0</span> pts</p>
+          <p class="score-helper">Fill all cups and the bucket to progress.</p>
+        </div>
+
+        <div class="endpoints-panel">
+          <p class="section-label">Fill Status</p>
+          <div id="endpointStatus" class="endpoint-status-list"></div>
+        </div>
+
+        <div class="control-panel">
+          <p class="section-label">Actions</p>
+          <div class="control-buttons">
+            <button id="runWaterButton" class="button-link primary-button control-btn" type="button">Run Water</button>
+            <button id="toggleGridButton" class="button-link secondary-button control-btn" type="button">Show Grid</button>
+            <button id="resetLevelButton" class="button-link secondary-button control-btn" type="button">Retry Level</button>
+            <button id="restartGameButton" class="button-link secondary-button control-btn" type="button">Restart Game</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="info-panel game-board-panel">
+        <div class="toolbox">
+          <p class="section-label">Piping Options</p>
+          <p class="toolbox-hint">Drag a piece onto the grid. Drag placed pieces to reposition them.</p>
+          <div id="pipeOptions" class="pipe-options" role="radiogroup" aria-label="Pipe options"></div>
+          <div class="toolbox-footer">
+            <button id="rotatePieceButton" class="button-link secondary-button tool-button" type="button">Rotate Selected</button>
+            <button id="eraseModeButton" class="button-link secondary-button tool-button" type="button">Eraser</button>
+          </div>
+        </div>
+
+        <div class="board-wrap">
+          <div id="freeflowStage" class="freeflow-stage" aria-label="Aqua Maze freeflow board">
+            <div id="sourceNode" class="stage-node source-node"></div>
+            <div id="targetNodes" class="target-nodes"></div>
+            <svg id="gridSvg" class="grid-svg" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <svg id="flowSvg" class="flow-svg" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div id="pipeLayer" class="pipe-layer"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <div id="helpModal" class="game-modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="helpModalTitle">
+        <p class="section-label">Help</p>
+        <h2 id="helpModalTitle">How to Play</h2>
+        <div id="helpModalContent" class="help-modal-content"></div>
+        <div id="helpModalActions" class="modal-actions"></div>
+      </div>
+    </div>
+
+    <div id="gameModal" class="game-modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <p class="section-label">Aqua Maze Update</p>
+        <h2 id="modalTitle">Level Complete</h2>
+        <p id="modalMessage" class="modal-message"></p>
+        <div id="modalActions" class="modal-actions"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

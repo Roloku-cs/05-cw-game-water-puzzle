@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Puzzle | charity: water</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell landing-page">
+    <section class="hero-panel">
+      <div class="hero-copy">
+        <p class="eyebrow">696 Million People Lack Clean Water</p>
+        <h1>Water Puzzle</h1>
+        <p class="hero-text">
+          Join charity: water's mission to end the global water crisis. Build pipe routes to deliver clean, safe water to communities around the world. Every puzzle solved brings us closer to ensuring everyone has access to life's most basic need.
+        </p>
+        <div class="hero-actions">
+          <a class="button-link primary-button" href="desktop.html">Play the Mission</a>
+          <a class="button-link secondary-button" href="#mission">Learn Our Impact</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="bubble bubble-one"></div>
+        <div class="bubble bubble-two"></div>
+        <div class="bubble bubble-three"></div>
+        <div class="reef-card reef-card-top">
+          <span class="reef-label">Our Impact</span>
+          <strong>charity: water has served 21.6M people across 29 countries.</strong>
+        </div>
+        <div class="reef-card reef-card-bottom">
+          <span class="reef-label">Mission Goal</span>
+          <strong>End the water crisis and ensure universal access to clean water.</strong>
+        </div>
+      </div>
+
+      <p class="mission-inline" id="mission">
+        Water Puzzle is an educational game developed for charity: water to raise awareness about the global water crisis. Through strategic problem-solving, players experience how complex water distribution challenges really are—and why 100% of charity: water donations go directly to building sustainable, community-owned water projects worldwide.
+      </p>
+    </section>
+
+    <section class="content-grid">
+      <article class="info-panel facts-panel">
+        <p class="section-label">The Water Crisis</p>
+        <p class="fact-panel-help">Hover a card or click it to learn more about water challenges worldwide.</p>
+        <div class="fact-card-grid">
+          <button class="fact-interactive-card fact-coral" type="button" aria-expanded="false">
+            <span class="fact-image" aria-hidden="true"></span>
+            <span class="fact-content">
+              <span class="fact-tag">Access Challenge</span>
+              <h3>Distance to Water</h3>
+              <span class="fact-summary">Many communities walk hours daily for water.</span>
+              <span class="fact-detail">In sub-Saharan Africa, women and children spend 40 billion hours each year collecting water. Access to nearby clean water means more time for school, work, and family.</span>
+            </span>
+          </button>
+
+          <button class="fact-interactive-card fact-plastic" type="button" aria-expanded="false">
+            <span class="fact-image" aria-hidden="true"></span>
+            <span class="fact-content">
+              <span class="fact-tag">Health Impact</span>
+              <h3>Waterborne Disease</h3>
+              <span class="fact-summary">Unsafe water causes disease and stunts growth.</span>
+              <span class="fact-detail">Over 2 billion people drink contaminated water daily. Waterborne diseases kill more children than any other infectious disease. Clean water and sanitation save lives.</span>
+            </span>
+          </button>
+
+          <button class="fact-interactive-card fact-protection" type="button" aria-expanded="false">
+            <span class="fact-image" aria-hidden="true"></span>
+            <span class="fact-content">
+              <span class="fact-tag">Our Solution</span>
+              <h3>Sustainable Projects</h3>
+              <span class="fact-summary">charity: water builds community-owned solutions.</span>
+              <span class="fact-detail">We partner with local organizations to build wells, rainwater systems, and filtration projects designed to last. 100% of public donations fund projects—private donors cover operating costs.</span>
+            </span>
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <footer class="landing-footer">
+      <p>Water Puzzle is developed in partnership with <strong>charity: water</strong></p>
+      <p>Learn more at <a href="https://www.charitywater.org" target="_blank" rel="noopener">charitywater.org</a></p>
+    </footer>
+  </main>
+
+  <script>
+    const factCards = document.querySelectorAll('.fact-interactive-card');
+
+    factCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const isActive = card.classList.contains('is-active');
+
+        factCards.forEach((otherCard) => {
+          otherCard.classList.remove('is-active');
+          otherCard.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isActive) {
+          card.classList.add('is-active');
+          card.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
