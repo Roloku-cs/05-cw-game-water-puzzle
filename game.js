@@ -102,7 +102,7 @@ const LEVELS = [
     name: "Level 3 - Global Network",
     minScore: 12,
     requireBucket: true,
-    pipeLimit: 8,
+    pipeLimit: 5,
     source: { x: 200, y: 600 },
     targets: [
       { id: "cup-a", kind: "cup", label: "Cup A", x: 500, y: 200 },
@@ -137,6 +137,12 @@ const LEVELS = [
       },
     ],
   },
+];
+
+const LEVEL_STAGE_BACKGROUNDS = [
+  "bg/lvl1.jpeg",
+  "bg/lvl2.jpg",
+  "bg/lvl3.jpg",
 ];
 
 const state = {
@@ -472,6 +478,11 @@ function renderStageNodes() {
   level.targets.forEach((target) => {
     const node = document.createElement("div");
     node.className = "stage-node target-node";
+    if (target.kind === "cup") {
+      node.classList.add("is-cup-target");
+    } else if (target.kind === "bucket") {
+      node.classList.add("is-storage-target");
+    }
     node.style.left = stageXPercent(target.x);
     node.style.top = stageYPercent(target.y);
 
@@ -483,7 +494,21 @@ function renderStageNodes() {
 
     const icon = document.createElement("span");
     icon.className = "target-icon";
-    icon.textContent = target.kind === "bucket" ? "🪣" : "🥤";
+    if (target.kind === "cup") {
+      const iconImage = document.createElement("img");
+      iconImage.className = "target-icon-image";
+      iconImage.alt = fill > 0 ? "Filled pitcher" : "Empty pitcher";
+      iconImage.src = fill > 0 ? "pics/full pitcher.png" : "pics/empty pitcher.png";
+      icon.appendChild(iconImage);
+    } else if (target.kind === "bucket") {
+      const iconImage = document.createElement("img");
+      iconImage.className = "target-icon-image";
+      iconImage.alt = fill > 0 ? "Filled storage tank" : "Empty storage tank";
+      iconImage.src = fill > 0 ? "pics/full storage..png" : "pics/empty storage.png";
+      icon.appendChild(iconImage);
+    } else {
+      icon.textContent = "•";
+    }
 
     const label = document.createElement("span");
     label.className = "target-label";
@@ -1494,7 +1519,7 @@ function showLevelIntroPopup() {
     message = "On this mission, efficiency is critical. For every 5 pipes you place, you lose 1 impact point. This reflects the real-world challenge of building sustainable water infrastructure with limited resources.\n\nPlan your routes strategically to maximize your score.";
   } else if (levelNum === 3) {
     title = "Resource Constraints";
-    message = "This advanced mission has limited resources. You can place a maximum of 8 pipes of each type.\n\nThis constraint mirrors real-world challenges in scaling water access globally. Every pipe must serve its purpose efficiently.";
+    message = "This advanced mission has limited resources. You can place a maximum of 5 pipes of each type.\n\nThis constraint mirrors real-world challenges in scaling water access globally. Every pipe must serve its purpose efficiently.";
   }
   
   if (title) {
@@ -1513,6 +1538,8 @@ function showLevelIntroPopup() {
 
 function loadLevel() {
   const level = getLevel();
+  const stageBackground =
+    LEVEL_STAGE_BACKGROUNDS[state.currentLevelIndex] || LEVEL_STAGE_BACKGROUNDS[0];
   
   // Validate walls don't enter element hitboxes
   if (!validateWallsNotInElementHitboxes()) {
@@ -1539,6 +1566,7 @@ function loadLevel() {
 
   refs.levelName.textContent = level.name;
   refs.levelRules.textContent = `Minimum score: ${level.minScore} ${level.requireBucket ? "+ Bucket" : ""}`;
+  refs.stage.style.setProperty("--level-background-image", `url("${stageBackground}")`);
   refs.toggleGridButton.textContent = state.showGrid ? "Hide Grid" : "Show Grid";
   refs.modal.classList.remove("is-open");
   refs.modal.setAttribute("aria-hidden", "true");
@@ -1587,7 +1615,7 @@ function showHelpModal() {
   if (level.pipeLimit) {
     contentHTML += `
         <li style="margin-top: 8px;"><strong>Level 3 Challenge:</strong> Limited resources available</li>
-        <li>You can only use 8 pipes of each type</li>
+        <li>You can only use 5 pipes of each type</li>
     `;
   }
   

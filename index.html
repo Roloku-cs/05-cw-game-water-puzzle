@@ -8,6 +8,10 @@
 </head>
 <body>
   <main class="page-shell landing-page">
+    <div class="page-utility-actions">
+      <button id="themeToggle" class="button-link secondary-button theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">Dark Mode</button>
+    </div>
+
     <section class="hero-panel">
       <div class="hero-copy">
         <p class="eyebrow">696 Million People Lack Clean Water</p>
@@ -16,7 +20,7 @@
           Join charity: water's mission to end the global water crisis. Build pipe routes to deliver clean, safe water to communities around the world. Every puzzle solved brings us closer to ensuring everyone has access to life's most basic need.
         </p>
         <div class="hero-actions">
-          <a class="button-link primary-button" href="desktop.html">Play the Mission</a>
+          <a class="button-link primary-button mission-play-button" href="desktop.html">Play the Mission</a>
           <a class="button-link secondary-button" href="#mission">Learn Our Impact</a>
         </div>
       </div>
@@ -84,6 +88,7 @@
     </footer>
   </main>
 
+  <script src="theme.js"></script>
   <script>
     const factCards = document.querySelectorAll('.fact-interactive-card');
 
